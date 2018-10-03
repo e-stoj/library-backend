@@ -12,7 +12,7 @@ import pl.ewe.library.repositories.BookRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 public class BookLocationController {
 

@@ -10,6 +10,7 @@ import pl.ewe.library.repositories.AuthorRepository;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class AuthorController {
 
