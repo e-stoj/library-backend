@@ -6,9 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.ewe.library.model.Book;
 import pl.ewe.library.model.BookLocation;
+import pl.ewe.library.repositories.BookLocationRepository;
 import pl.ewe.library.repositories.BookRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
@@ -17,6 +20,8 @@ public class BookController {
 
     @Autowired
     BookRepository bookRepository;
+    @Autowired
+    BookLocationRepository bookLocationRepository;
 
     @GetMapping("/books")
     public List<Book> getAllBooks() {
@@ -24,8 +29,12 @@ public class BookController {
         return (List<Book>) books;
     }
 
-    @PostMapping("/books")
-    public ResponseEntity addBook(@RequestBody Book book) {
+    @PostMapping("/books-locations/{id}/add-book")
+    public ResponseEntity addBook(@PathVariable Integer id, @RequestBody Book book) {
+        BookLocation currentLocation = bookLocationRepository.findById(id).orElseThrow(() -> new RuntimeException("don't exist"));
+        book.setLocation(currentLocation);
+        currentLocation.setFree(false);
+        bookLocationRepository.save(currentLocation);
         bookRepository.save(book);
         return new ResponseEntity(HttpStatus.OK);
     }

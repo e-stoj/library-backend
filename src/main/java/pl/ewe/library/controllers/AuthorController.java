@@ -29,7 +29,7 @@ public class AuthorController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping("author/id/books")
+    @GetMapping("author/{id}/books")
     public List<Book> getAuthorBooks(@RequestParam int id) {
         Author author = authorRepository.findById(id).orElseThrow(() -> new RuntimeException("Book with such id doesn't exist"));
         return author.getListOfBooks();

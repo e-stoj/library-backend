@@ -24,6 +24,7 @@ public class BookLocation {
     }
 
     public BookLocation() {
+        this.isFree = true;
     }
 
     public Integer getLocationId() {
