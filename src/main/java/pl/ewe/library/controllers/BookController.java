@@ -8,20 +8,17 @@ import pl.ewe.library.model.Book;
 import pl.ewe.library.model.BookLocation;
 import pl.ewe.library.repositories.BookLocationRepository;
 import pl.ewe.library.repositories.BookRepository;
-
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowCredentials = "true", maxAge = 3600L)
 @RestController
 public class BookController {
 
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
     @Autowired
-    BookLocationRepository bookLocationRepository;
+    private BookLocationRepository bookLocationRepository;
 
     @GetMapping("/books")
     public List<Book> getAllBooks() {

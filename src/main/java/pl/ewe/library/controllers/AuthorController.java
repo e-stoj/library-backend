@@ -10,7 +10,7 @@ import pl.ewe.library.repositories.AuthorRepository;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowCredentials = "true", maxAge = 3600L)
 @RestController
 public class AuthorController {
 
@@ -24,14 +24,8 @@ public class AuthorController {
     }
 
     @PostMapping("/authors")
-    public ResponseEntity addBook(@RequestBody Author author) {
+    public ResponseEntity addAuthor(@RequestBody Author author) {
         authorRepository.save(author);
         return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @GetMapping("author/{id}/books")
-    public List<Book> getAuthorBooks(@RequestParam int id) {
-        Author author = authorRepository.findById(id).orElseThrow(() -> new RuntimeException("Book with such id doesn't exist"));
-        return author.getListOfBooks();
     }
 }
