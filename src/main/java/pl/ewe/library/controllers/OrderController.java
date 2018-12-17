@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowCredentials = "true", maxAge = 3600L)
 @RestController
 public class OrderController {
 
@@ -38,7 +38,7 @@ public class OrderController {
                 .body("At least one of books is not available");
     }
 
-    @PutMapping("orders/id/return")
+    @PutMapping("orders/{id}/return")
     public ResponseEntity returnOrder(@PathVariable int id) {
         BookOrder bookOrder = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("BookOrder with such id doesn't exist"));
         bookOrder.setDateOfReturn(LocalDate.now());

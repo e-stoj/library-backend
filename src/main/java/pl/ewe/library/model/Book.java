@@ -16,16 +16,17 @@ public class Book {
     private String title;
     private String publishingHouse;
     private Integer yearOfPublish;
-    private double value;
     private String type;
     private boolean isAvailable;
+    private Integer booksAmount;
+    private Integer ordersAmount;
+    private String description;
 
-    public Book(BookLocation location, String title, String publishingHouse, Integer yearOfPublish, double value, String type) {
+    public Book(BookLocation location, String title, String publishingHouse, Integer yearOfPublish, String type) {
         this.location = location;
         this.title = title;
         this.publishingHouse = publishingHouse;
         this.yearOfPublish = yearOfPublish;
-        this.value = value;
         this.type = type;
         this.isAvailable = true;
     }
@@ -80,14 +81,6 @@ public class Book {
 
     public void setYearOfPublish(Integer yearOfPublish) {
         this.yearOfPublish = yearOfPublish;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
     }
 
     public String getType() {

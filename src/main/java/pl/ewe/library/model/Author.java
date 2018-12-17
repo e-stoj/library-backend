@@ -14,17 +14,13 @@ public class Author {
     private Integer authorId;
     private String name;
     private String surname;
-
     @ManyToMany
     private List<Book> listOfBooks;
 
-    private int yearOfBirth;
-
-    public Author(String name, String surname, List<Book> listOfBooks, int yearOfBirth) {
+    public Author(String name, String surname, List<Book> listOfBooks) {
         this.name = name;
         this.surname = surname;
         this.listOfBooks = listOfBooks;
-        this.yearOfBirth = yearOfBirth;
     }
 
     public Author() {
@@ -60,13 +56,5 @@ public class Author {
 
     public void setListOfBooks(List<Book> listOfBooks) {
         this.listOfBooks = listOfBooks;
-    }
-
-    public int getYearOfBirth() {
-        return yearOfBirth;
-    }
-
-    public void setYearOfBirth(int yearOfBirth) {
-        this.yearOfBirth = yearOfBirth;
     }
 }

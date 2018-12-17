@@ -12,7 +12,7 @@ import pl.ewe.library.repositories.BookRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowCredentials = "true", maxAge = 3600L)
 @RestController
 public class BookLocationController {
 
@@ -54,9 +54,9 @@ public class BookLocationController {
     }
 
     @GetMapping("/books-locations/free")
-    public List<BookLocation> getFreeLocations() {
-        Iterable<BookLocation> bookLocations = bookLocationRepository.findAll();
-        List<BookLocation> list = (List<BookLocation>) bookLocations;
+        public List<BookLocation> getFreeLocations() {
+            Iterable<BookLocation> bookLocations = bookLocationRepository.findAll();
+            List<BookLocation> list = (List<BookLocation>) bookLocations;
 
         return list.stream()
                 .filter(location -> location.isFree())
