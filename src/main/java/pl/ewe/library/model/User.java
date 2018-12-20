@@ -23,12 +23,13 @@ public class User {
     private String email;
     private String role;
 
-    public User(String name, String surname, String username, String password, String email) {
+    public User(String name, String surname, String username, String password, String email, String role) {
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.role = role;
     }
 
     public User() {
@@ -82,5 +83,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

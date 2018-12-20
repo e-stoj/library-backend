@@ -40,7 +40,7 @@ public class BookController {
     public ResponseEntity changeBookLocation(@PathVariable Integer id, @RequestBody BookLocation bookLocation) {
         Book currentBook = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book with such id doesn't exist"));
         currentBook.setLocation(bookLocation);
-        return new ResponseEntity((HttpStatus.OK));
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping("/books/available")
@@ -48,5 +48,11 @@ public class BookController {
         Iterable<Book> books = bookRepository.findAll();
         List<Book> bookList = (List<Book>) books;
         return bookList.stream().filter(book -> book.isAvailable()).collect(Collectors.toList());
-     }
+    }
+
+    @DeleteMapping("/books/{bookId}")
+    public ResponseEntity deleteBook(@PathVariable Integer bookId) {
+        bookRepository.deleteById(bookId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }

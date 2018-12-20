@@ -20,15 +20,16 @@ public class Book {
     private boolean isAvailable;
     private Integer booksAmount;
     private Integer ordersAmount;
-    private String description;
+    private String descryption;
 
-    public Book(BookLocation location, String title, String publishingHouse, Integer yearOfPublish, String type) {
+    public Book(BookLocation location, String title, String publishingHouse, Integer yearOfPublish, String type, String descryption) {
         this.location = location;
         this.title = title;
         this.publishingHouse = publishingHouse;
         this.yearOfPublish = yearOfPublish;
         this.type = type;
         this.isAvailable = true;
+        this.descryption = descryption;
     }
 
     public Book() {
