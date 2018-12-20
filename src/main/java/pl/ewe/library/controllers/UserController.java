@@ -27,4 +27,10 @@ public class UserController {
                 .status(HttpStatus.BAD_REQUEST)
                 .body("such user doesn't exist");
     }
+
+    @PostMapping("/users")
+    public ResponseEntity addAuthor(@RequestBody User user) {
+        userRepository.save(user);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
