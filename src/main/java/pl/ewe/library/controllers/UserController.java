@@ -8,6 +8,8 @@ import pl.ewe.library.model.User;
 import pl.ewe.library.model.UserDetails;
 import pl.ewe.library.repositories.UserRepository;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", allowCredentials = "true", maxAge = 3600L)
 @RestController
 public class UserController {
@@ -28,9 +30,21 @@ public class UserController {
                 .body("such user doesn't exist");
     }
 
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        Iterable<User> users = userRepository.findAll();
+        return (List<User>) users;
+    }
+
     @PostMapping("/users")
-    public ResponseEntity addAuthor(@RequestBody User user) {
+    public ResponseEntity addUser(@RequestBody User user) {
         userRepository.save(user);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity deleteUser(@PathVariable Integer id) {
+        userRepository.deleteById(id);
+        return  new ResponseEntity(HttpStatus.OK);
     }
 }
