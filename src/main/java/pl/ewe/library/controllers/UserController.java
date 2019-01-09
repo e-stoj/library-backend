@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.ewe.library.model.BookOrder;
 import pl.ewe.library.model.User;
 import pl.ewe.library.model.UserDetails;
 import pl.ewe.library.repositories.UserRepository;
@@ -47,5 +48,11 @@ public class UserController {
     public ResponseEntity deleteUser(@PathVariable Integer id) {
         userRepository.deleteById(id);
         return  new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/users/{id}/orders")
+    public List<BookOrder> getUserCurrentOrders(@PathVariable Integer id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("no such user"));
+        return user.getCurrentOrders();
     }
 }

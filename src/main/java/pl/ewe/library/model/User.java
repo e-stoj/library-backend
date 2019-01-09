@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -30,9 +31,11 @@ public class User {
         this.password = password;
         this.email = email;
         this.role = role;
+        this.currentOrders = new LinkedList<>();
     }
 
     public User() {
+        this.currentOrders = new LinkedList<>();
     }
 
     public Integer getId() {

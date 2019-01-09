@@ -3,6 +3,7 @@ package pl.ewe.library.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import pl.ewe.library.model.Book;
 import pl.ewe.library.model.BookOrder;
@@ -33,11 +34,12 @@ public class OrderController {
     }
 
     @PostMapping("/books/{bookId}/order/{userId}")
-    public ResponseEntity addOrder(@PathVariable Integer bookId, @PathVariable Integer userId, @RequestBody BookOrder bookOrder) {
+    public ResponseEntity addOrder(@PathVariable Integer bookId, @PathVariable Integer userId) {
+        BookOrder bookOrder = new BookOrder();
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("book doesn't exist"));
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user doesn't exist"));
-        bookOrder.setUser(user);
         if(book.isAvailable()) {
+            bookOrder.setUser(user);
             bookOrder.setBorrowedBook(book);
             book.setOrdersAmount(book.getOrdersAmount()+1);
             book.setAvailable(false);
@@ -46,7 +48,7 @@ public class OrderController {
         }
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body("At least one of books is not available");
+                .body(" books is not available");
     }
 
     @PutMapping("orders/{id}/return")

@@ -29,10 +29,12 @@ public class Book {
         this.type = type;
         this.isAvailable = true;
         this.descryption = descryption;
+        this.ordersAmount = 0;
     }
 
     public Book() {
         this.isAvailable = true;
+        this.ordersAmount = 0;
     }
 
     public Integer getBookId() {
