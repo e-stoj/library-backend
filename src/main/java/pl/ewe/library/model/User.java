@@ -4,10 +4,8 @@ package pl.ewe.library.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -22,6 +20,8 @@ public class User {
     @Column(unique = true)
     private String email;
     private String role;
+    @OneToMany
+    private List<BookOrder> currentOrders;
 
     public User(String name, String surname, String username, String password, String email, String role) {
         this.name = name;
@@ -39,7 +39,7 @@ public class User {
         return userId;
     }
 
-    public void setId(int userId) {
+    public void setId(Integer userId) {
         this.userId = userId;
     }
 
@@ -91,5 +91,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<BookOrder> getCurrentOrders() {
+        return currentOrders;
+    }
+
+    public void setCurrentOrders(List<BookOrder> currentOrders) {
+        this.currentOrders = currentOrders;
     }
 }

@@ -6,7 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.ewe.library.model.Book;
 import pl.ewe.library.model.BookOrder;
+import pl.ewe.library.model.User;
+import pl.ewe.library.repositories.BookRepository;
 import pl.ewe.library.repositories.OrderRepository;
+import pl.ewe.library.repositories.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +21,10 @@ public class OrderController {
 
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/orders")
     public List<BookOrder> getAllOrders() {
@@ -25,11 +32,15 @@ public class OrderController {
         return (List<BookOrder>) orders;
     }
 
-    @PostMapping("/orders")
-    public ResponseEntity addOrder(@RequestBody BookOrder bookOrder) {
-        List<Book> books = bookOrder.getBorrowedBooks().stream().filter(book -> !book.isAvailable()).collect(Collectors.toList());
-        if(books.isEmpty()) {
-            books.stream().forEach(book -> book.setAvailable(false));
+    @PostMapping("/books/{bookId}/order/{userId}")
+    public ResponseEntity addOrder(@PathVariable Integer bookId, @PathVariable Integer userId, @RequestBody BookOrder bookOrder) {
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("book doesn't exist"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("user doesn't exist"));
+        bookOrder.setUser(user);
+        if(book.isAvailable()) {
+            bookOrder.setBorrowedBook(book);
+            book.setOrdersAmount(book.getOrdersAmount()+1);
+            book.setAvailable(false);
             orderRepository.save(bookOrder);
             return new ResponseEntity(HttpStatus.OK);
         }
@@ -42,7 +53,8 @@ public class OrderController {
     public ResponseEntity returnOrder(@PathVariable int id) {
         BookOrder bookOrder = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("BookOrder with such id doesn't exist"));
         bookOrder.setDateOfReturn(LocalDate.now());
-        bookOrder.getBorrowedBooks().forEach(book -> book.setAvailable(true));
+        bookOrder.getBorrowedBook().setAvailable(true);
+        orderRepository.deleteById(id);
         return new ResponseEntity((HttpStatus.OK));
     }
 }

@@ -37,7 +37,7 @@ public class BookController {
     }
 
     @PutMapping("/books/{id}")
-    public ResponseEntity changeBook(@PathVariable Integer id, @RequestBody BookLocation bookLocation) {
+    public ResponseEntity changeBookLocation(@PathVariable Integer id, @RequestBody BookLocation bookLocation) {
         Book currentBook = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book with such id doesn't exist"));
         currentBook.setLocation(bookLocation);
         return new ResponseEntity(HttpStatus.OK);

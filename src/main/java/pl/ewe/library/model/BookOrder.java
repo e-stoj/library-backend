@@ -10,22 +10,24 @@ public class BookOrder {
     @Id
     @GeneratedValue
     private Integer orderId;
-    @ManyToMany
-    private List<Book> borrowedBooks;
+    @ManyToOne
+    private Book borrowedBook;
     @ManyToOne
     private User user;
     private LocalDate dateOfBorrow;
     private LocalDate dateToReturn;
     private LocalDate dateOfReturn;
 
-    public BookOrder(List<Book> borrowedBooks, User user, LocalDate dateOfBorrow) {
-        this.borrowedBooks = borrowedBooks;
+    public BookOrder(Book borrowedBook, User user) {
+        this.borrowedBook = borrowedBook;
         this.user = user;
-        this.dateOfBorrow = dateOfBorrow;
+        this.dateOfBorrow = LocalDate.now();
         this.dateToReturn = dateOfBorrow.plusDays(21);
     }
 
     public BookOrder() {
+        this.dateOfBorrow = LocalDate.now();
+        this.dateToReturn = dateOfBorrow.plusDays(21);
     }
 
     public Integer getOrderId() {
@@ -36,12 +38,20 @@ public class BookOrder {
         this.orderId = orderId;
     }
 
-    public List<Book> getBorrowedBooks() {
-        return borrowedBooks;
+    public Book getBorrowedBook() {
+        return borrowedBook;
     }
 
-    public void setBorrowedBooks(List<Book> borrowedBooks) {
-        this.borrowedBooks = borrowedBooks;
+    public void setBorrowedBook(Book borrowedBook) {
+        this.borrowedBook = borrowedBook;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public LocalDate getDateOfBorrow() {

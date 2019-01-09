@@ -11,19 +11,18 @@ public class Book {
     private Integer bookId;
     @OneToOne
     private BookLocation location;
-    @ManyToMany
-    private List<Author> listOfAuthors;
+    private String author;
     private String title;
     private String publishingHouse;
     private Integer yearOfPublish;
     private String type;
     private boolean isAvailable;
-    private Integer booksAmount;
     private Integer ordersAmount;
     private String descryption;
 
-    public Book(BookLocation location, String title, String publishingHouse, Integer yearOfPublish, String type, String descryption) {
+    public Book(BookLocation location, String author, String title, String publishingHouse, Integer yearOfPublish, String type, String descryption) {
         this.location = location;
+        this.author = author;
         this.title = title;
         this.publishingHouse = publishingHouse;
         this.yearOfPublish = yearOfPublish;
@@ -64,12 +63,12 @@ public class Book {
         return publishingHouse;
     }
 
-    public List<Author> getListOfAuthors() {
-        return listOfAuthors;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setListOfAuthors(List<Author> listOfAuthors) {
-        this.listOfAuthors = listOfAuthors;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public void setPublishingHouse(String publishingHouse) {
@@ -98,5 +97,21 @@ public class Book {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    public Integer getOrdersAmount() {
+        return ordersAmount;
+    }
+
+    public void setOrdersAmount(Integer ordersAmount) {
+        this.ordersAmount = ordersAmount;
+    }
+
+    public String getDescryption() {
+        return descryption;
+    }
+
+    public void setDescryption(String descryption) {
+        this.descryption = descryption;
     }
 }
