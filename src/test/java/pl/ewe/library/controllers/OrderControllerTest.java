@@ -23,7 +23,7 @@ public class OrderControllerTest {
     OrderRepository orderRepository;
 
     @Test
-    public void shouldFindBook() throws Exception {
+    public void shouldFindOrder() throws Exception {
         BookOrder bookOrder = new BookOrder();
         bookOrder.setOrderId(1);
 
@@ -61,7 +61,7 @@ public class OrderControllerTest {
     }
 
     @Test
-    public void shouldDeleteBook() {
+    public void shouldDeleteOrder() {
         BookOrder bookOrder = new BookOrder();
         bookOrder.setOrderId(1);
 
