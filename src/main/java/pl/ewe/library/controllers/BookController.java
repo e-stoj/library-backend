@@ -63,7 +63,7 @@ public class BookController {
         Iterable<Book> books = bookRepository.findAll();
         List<Book> bookList = (List<Book>) books;
         return bookList.stream()
-                .sorted(Comparator.comparing(Book::getOrdersAmount))
+                .sorted(Comparator.comparing(Book::getOrdersAmount).reversed())
                 .limit(5)
                 .collect(Collectors.toList());
     }
