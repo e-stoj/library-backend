@@ -8,6 +8,8 @@ import pl.ewe.library.model.Book;
 import pl.ewe.library.model.BookLocation;
 import pl.ewe.library.repositories.BookLocationRepository;
 import pl.ewe.library.repositories.BookRepository;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,12 +49,22 @@ public class BookController {
     public List<Book> getAvailableBooks() {
         Iterable<Book> books = bookRepository.findAll();
         List<Book> bookList = (List<Book>) books;
-        return bookList.stream().filter(book -> book.isAvailable()).collect(Collectors.toList());
+        return bookList.stream().filter(Book::isAvailable).collect(Collectors.toList());
     }
 
     @DeleteMapping("/books/{bookId}")
     public ResponseEntity deleteBook(@PathVariable Integer bookId) {
         bookRepository.deleteById(bookId);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/books/top5")
+    public List<Book> getTopBooks() {
+        Iterable<Book> books = bookRepository.findAll();
+        List<Book> bookList = (List<Book>) books;
+        return bookList.stream()
+                .sorted(Comparator.comparing(Book::getOrdersAmount))
+                .limit(5)
+                .collect(Collectors.toList());
     }
 }

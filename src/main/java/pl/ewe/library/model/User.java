@@ -21,8 +21,6 @@ public class User {
     @Column(unique = true)
     private String email;
     private String role;
-    @OneToMany
-    private List<BookOrder> currentOrders;
 
     public User(String name, String surname, String username, String password, String email, String role) {
         this.name = name;
@@ -31,11 +29,10 @@ public class User {
         this.password = password;
         this.email = email;
         this.role = role;
-        this.currentOrders = new LinkedList<>();
     }
 
     public User() {
-        this.currentOrders = new LinkedList<>();
+
     }
 
     public Integer getId() {
@@ -94,13 +91,5 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public List<BookOrder> getCurrentOrders() {
-        return currentOrders;
-    }
-
-    public void setCurrentOrders(List<BookOrder> currentOrders) {
-        this.currentOrders = currentOrders;
     }
 }

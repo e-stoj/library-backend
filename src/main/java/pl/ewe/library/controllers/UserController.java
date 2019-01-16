@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import pl.ewe.library.model.BookOrder;
 import pl.ewe.library.model.User;
 import pl.ewe.library.model.UserDetails;
+import pl.ewe.library.repositories.OrderRepository;
 import pl.ewe.library.repositories.UserRepository;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", allowCredentials = "true", maxAge = 3600L)
 @RestController
@@ -18,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody UserDetails userDetails) {
@@ -53,6 +58,8 @@ public class UserController {
     @GetMapping("/users/{id}/orders")
     public List<BookOrder> getUserCurrentOrders(@PathVariable Integer id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("no such user"));
-        return user.getCurrentOrders();
+        Iterable<BookOrder> orderIterable = orderRepository.findAll();
+        List<BookOrder> orderList = (List<BookOrder>) orderIterable;
+        return orderList.stream().filter(order -> order.getUser().getId().equals(id)).collect(Collectors.toList());
     }
 }
