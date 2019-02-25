@@ -1,6 +1,9 @@
 package pl.ewe.library.model;
 
+import org.springframework.beans.factory.annotation.Required;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -14,6 +17,7 @@ public class Book {
     private String author;
     private String title;
     private String publishingHouse;
+    @NotNull
     private Integer yearOfPublish;
     private String type;
     private boolean isAvailable;
