@@ -1,0 +1,31 @@
+.home-page {
+  background-color: rgb(199, 199, 199); 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  height: -webkit-fill-available;
+}
+
+.home-page-element {
+  margin: 15px;
+  width: 20%;
+}
+
+.line {
+  border: 1px solid rgb(131, 131, 131);
+  min-width: 45%;
+  height: 0px;
+}
+
+.home-page-span {
+  color: rgb(131, 131, 131);
+  font-weight: 600;
+}
+
+.home-page-icon {
+  padding: 30px;
+  color: rgb(131, 131, 131);
+}
+

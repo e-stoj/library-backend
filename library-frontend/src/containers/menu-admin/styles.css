@@ -1,0 +1,18 @@
+.mainpage-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(250, 250, 250);   
+  width: 20vw;
+  height: 100vh;
+}
+
+.mainpage-menu-element {
+  margin-top: 30px;
+  padding: 5px;
+  width: 94.5%;
+  border-top: slategrey solid 1px;
+  border-bottom: slategrey solid 1px;
+  background-color: whitesmoke;
+}

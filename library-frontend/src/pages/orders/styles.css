@@ -1,0 +1,39 @@
+.orders {
+  display: flex;
+}
+
+.order-page {
+  display: flex;
+  height: 100vh;
+}
+
+.add-order {
+ width: 50%;
+ padding: 30px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.orders-list {
+
+  padding: 30px;
+}
+
+.orders-table-header {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  background: rgb(250,250,250);
+}
+
+.orders-table-column {
+  width: 35%;
+  margin: 5px;
+  word-wrap: break-word;
+}
+
+.orders-table-row {
+  display: flex;
+  margin: 5px;
+}

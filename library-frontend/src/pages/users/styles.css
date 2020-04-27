@@ -1,0 +1,39 @@
+.users-page {
+  display: flex;
+  height: 95vh;
+  width: 100vw;
+}
+
+.users {
+  width: inherit;
+}
+
+.add-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.users-list {
+  height: 70%;
+  width: 75%;
+  padding: 30px;
+}
+ 
+.users-table-header {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  background: rgb(250,250,250);
+}
+
+.users-table-column {
+  width: 40%;
+  margin: 5px;
+}
+
+.users-table-row {
+  margin: 5px;
+  display: flex;
+}
